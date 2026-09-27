@@ -19,7 +19,9 @@ if (FINE.matches) {
   document.body.appendChild(cv);
   var x = cv.getContext('2d'), W = 0, H = 0, motes = [], running = false, last = 0, lx = -99, ly = -99;
   var offX = 0, offY = 0, queued = false;
-
+  // Some page builders put a transform on a parent element, which makes position:fixed
+  // resolve against that parent instead of the window — the canvas then drifts by however
+  // far the page is scrolled. Measure where the canvas really is and pull it back.
   function sync() {
     queued = false;
     cv.style.transform = 'none';
@@ -82,7 +84,7 @@ function buildPad() {
   actx = new AC();
   master = actx.createGain(); master.gain.value = 0; master.connect(actx.destination);
 
-
+  // airy pad: a soft open fifth high up, gently breathing. No low drone, no long tails.
   var pad = actx.createGain(); pad.gain.value = 0.5;
   var hp = actx.createBiquadFilter(); hp.type = 'highpass'; hp.frequency.value = 220;
   var lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2200; lp.Q.value = 0.3;
@@ -91,7 +93,7 @@ function buildPad() {
     var o = actx.createOscillator(), g = actx.createGain();
     o.type = 'sine'; o.frequency.value = v[0]; o.detune.value = (i - 1.5) * 3;
     g.gain.value = v[1];
-
+    // slow breath on each voice, at a slightly different rate
     var lfo = actx.createOscillator(), lg = actx.createGain();
     lfo.frequency.value = 0.045 + i * 0.017; lg.gain.value = v[1] * 0.45;
     lfo.connect(lg); lg.connect(g.gain); lfo.start();
@@ -101,7 +103,7 @@ function buildPad() {
   chimeBus = actx.createGain(); chimeBus.gain.value = 0.55; chimeBus.connect(master);
   return true;
 }
-
+// one bell note: quick attack, short bright decay, a little shimmer on top
 function bell(freq, at, level) {
   var t0 = actx.currentTime + at, out = actx.createGain();
   out.gain.value = level; out.connect(chimeBus);
@@ -114,7 +116,7 @@ function bell(freq, at, level) {
     o.connect(g); g.connect(out); o.start(t0); o.stop(t0 + p[2] + 0.05);
   });
 }
-
+// a short phrase of two or three notes, like a wind chime
 PM.shutterFx = function () {
   if (!soundOn || !actx || actx.state !== 'running') return;
   var t = actx.currentTime, n = actx.createBufferSource(), buf = actx.createBuffer(1, actx.sampleRate * 0.08, actx.sampleRate), d = buf.getChannelData(0);

@@ -54,9 +54,9 @@
 .pm-zt h1,.pm-zt h2{font-family:var(--display);font-weight:300;font-size:clamp(30px,5.4vw,70px);line-height:1.1;letter-spacing:.14em;text-align:center}
 .pm[data-lang=zh] .pm-zt h1,.pm[data-lang=zh] .pm-zt h2{letter-spacing:.2em}
 
-/* Landing: the viewfinder */
+/* the viewfinder */
 .pm-hero{padding:clamp(14px,2vw,30px) clamp(14px,2vw,30px) 0}
-.pm-view{position:relative;overflow:hidden;min-height:min(78vh,780px);display:flex;align-items:flex-end;border:1px solid #23232a;background:#0c0c0e;isolation:isolate}
+.pm-view{position:relative;overflow:hidden;min-height:min(78vh,780px);display:flex;align-items:flex-end;border:1px solid var(--frame);background:#0c0c0e;isolation:isolate}
 .pm-view .pm-hero-pic{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.07);transition:transform 3.4s var(--ease),opacity .45s}
 .pm-hero.in .pm-view .pm-hero-pic{transform:scale(1)}
 .pm-view-dim{position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,9,11,.6) 0%,rgba(9,9,11,.12) 34%,rgba(9,9,11,.5) 66%,rgba(9,9,11,.88) 100%)}

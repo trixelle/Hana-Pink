@@ -1,13 +1,10 @@
-<!-- Hana Pink site — part 5 of 14: CSS 5 of 5 (viewer, teleport bar, chat log, toast)
-     Carrd: Embed element, Type: Code, Style: Hidden (Head)
-     Keep the parts in this order. -->
 <style>
-/* ---------- Layers ---------- */
+/* Layers */
 .pm-lb{position:fixed;inset:0;z-index:2147483000;background:color-mix(in srgb,var(--ground) 97%,transparent);
   -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;flex-direction:column}
 .pm-lb-stage{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;touch-action:pan-y;user-select:none}
 .pm-lb-frame{position:relative;line-height:0}
-.pm-lb-frame img{background:var(--mist);transition:opacity .3s}
+.pm-lb-frame img{background:var(--mist);border:1px solid var(--frame);transition:opacity .3s}
 .pm-lb-frame .pm-vf{--vf-inset:-14px;--vf:20px}
 .pm-lb-hud{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 26px 18px;border-top:1px solid var(--line);transition:opacity .3s}
 .pm-lb-info{display:flex;flex-wrap:wrap;gap:2px 22px;font-size:12.5px;color:var(--ash);min-width:0}
@@ -26,12 +23,12 @@
 }
 
 .pm-cast{position:fixed;inset:0;z-index:2147483100;pointer-events:none;background:rgba(14,14,16,0);transition:background .35s;display:flex;align-items:flex-end;justify-content:center;padding-bottom:24vh}
-.pm-cast.on{background:rgba(14,14,16,.6)}
+.pm-cast.on{background:rgba(17,17,17,.42)}
 .pm-cast-box{width:min(340px,80vw);opacity:0;transform:translateY(6px);transition:opacity .25s,transform .25s}
 .pm-cast.on .pm-cast-box{opacity:1;transform:none}
-.pm-cast-row{display:flex;justify-content:space-between;gap:12px;font-family:var(--pixel);font-size:8px;letter-spacing:.18em;margin-bottom:8px;color:#ececee;text-transform:uppercase}
+.pm-cast-row{display:flex;justify-content:space-between;gap:12px;font-family:var(--pixel);font-size:8px;letter-spacing:.18em;margin-bottom:8px;color:#fff;text-transform:uppercase}
 .pm-cast-bar{height:6px;border:1px solid rgba(255,255,255,.5);padding:1px;background:rgba(255,255,255,.06)}
-.pm-cast-bar i{display:block;height:100%;width:0;background:#ececee}
+.pm-cast-bar i{display:block;height:100%;width:0;background:#fff}
 .pm-cast.run .pm-cast-bar i{width:100%;transition:width var(--cast,900ms) linear}
 .pm-flash{position:fixed;inset:0;opacity:0;background:radial-gradient(circle at 50% 62%,rgba(255,255,255,.92) 0%,rgba(255,255,255,.6) 38%,rgba(255,255,255,0) 78%)}
 .pm-cast.flash .pm-flash{animation:pm-flash .75s ease-out}

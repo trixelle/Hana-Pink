@@ -2,28 +2,24 @@
 window.PM = window.PM || {};
 
 PM.CONFIG = {
-  cloudName: '',                 // Cloudinary cloud name. TESTING THIS RN
+  cloudName: 'pa5desou',         // Cloudinary cloud name. Empty = demo placeholders.
   thumbWidths: [480, 960, 1600], // grid sizes; the browser picks one per screen
   fullWidths: [960, 1600, 2400], // viewer sizes
   batchSize: 18,                 // photos added per scroll step
-  defaultLang: 'en',             // ENGLISH or CHINESE button'
-  heroImage: '',                 // full image URL for the home screen
+  defaultLang: 'en',             // 'en' or 'zh'
+  heroTag: 'featured',           // tag whose photos the landing screen cycles through
+  heroImage: '',                 // pin one image as the first landing frame (optional)
   profileImage: '',              // full image URL for the Adventurer plate
   cursor: { normal: '', normalX: 12, normalY: 12, pointer: '', pointerX: 12, pointerY: 2 },
   cursorTrail: true,
-  musicUrl: '',                  // direct link to an audio FILE (.mp3/.m4a).
+  musicUrl: '',                  // direct link to an audio FILE (.mp3/.m4a). A YouTube page will not play.
   castTime: 900,                 // teleport cast bar length (ms)
   showIntro: true                // title card, once per visit
 };
 
 PM.REGIONS = [
-  { id: 'featured', en: 'Featured', zh: '精选作品', featured: true, places: [
-    { tag: 'featured',        en: 'Featured',        zh: '精选作品' }
-  ]},
   { id: 'portraits', en: 'Portraits', zh: '人像写真', places: [
-    { tag: 'oc-profile',      en: 'OC Profile',      zh: '角色档案' },
     { tag: 'close-up',        en: 'Close-up',        zh: '面部特写' },
-    { tag: 'full-body',       en: 'Full Body',       zh: '全身写真' },
     { tag: 'emotional',       en: 'Emotional',       zh: '情绪人像' }
   ]},
   { id: 'atmosphere', en: 'Atmosphere', zh: '氛围场景', places: [
@@ -33,22 +29,12 @@ PM.REGIONS = [
     { tag: 'nature-scenery',  en: 'Nature & Scenery',zh: '自然风景类' }
   ]},
   { id: 'glamour', en: 'Glamour', zh: '幻化穿搭', places: [
-    { tag: 'pink-sweet',      en: 'Pink & Sweet',    zh: '粉色系' },
-    { tag: 'casual',          en: 'Casual',          zh: '日常系' },
-    { tag: 'dark-cool',       en: 'Dark & Cool',     zh: '暗黑系' },
-    { tag: 'elegant',         en: 'Elegant',         zh: '典雅系' },
-    { tag: 'seasonal',        en: 'Seasonal',        zh: '特别篇' }
-  ]},
-  { id: 'stories', en: 'Stories', zh: '故事创作', places: [
-    // rename these two once she decides on her story sets
-    { tag: 'story-one',       en: 'Story One',       zh: '故事一' },
-    { tag: 'story-two',       en: 'Story Two',       zh: '故事二' }
+    { tag: 'light-palette',   en: 'Light Palette',   zh: '浅色系' },
+    { tag: 'dark-palette',    en: 'Dark Palette',    zh: '深色系' }
   ]},
   { id: 'together', en: 'Together', zh: '双人及多人', places: [
     { tag: 'couples',         en: 'Couples',         zh: '情侣' },
-    { tag: 'friends',         en: 'Friends',         zh: '好友' },
-    { tag: 'groups',          en: 'Groups',          zh: '团体' },
-    { tag: 'events',          en: 'Events',          zh: '活动' }
+    { tag: 'groups',          en: 'Groups',          zh: '团体' }
   ]}
 ];
 
@@ -91,7 +77,7 @@ PM.PROFILE = {
     { k: { en: 'Unsettled by', zh: '不擅长' }, v: { en: 'Noise, and intense negative emotions', zh: '嘈杂的环境，与强烈的负面情绪' } },
     { k: { en: 'Wish', zh: '愿望' },           v: { en: 'That her cafe becomes a safe haven for every adventurer, and that she gets to travel every field of flowers in Eorzea', zh: '希望咖啡馆能成为所有冒险者的避风港，也希望能带着伙伴们走遍艾欧泽亚的每一片花海，看遍所有春日的樱花' } }
   ],
-  secret: { en: 'When she meets someone she likes, her horns grows warm and turn reds, without her even noticing...',
-            zh: '遇见喜欢的人时，她的龙角会悄悄发烫泛红， 连她自己都没发现。' }
+  secret: { en: 'When she meets someone she likes, her horns grows warm and turn red without her even noticing...',
+            zh: '遇见喜欢的人时，她的龙角会悄悄发烫泛红 —— 连她自己都没发现。' }
 };
 </script>

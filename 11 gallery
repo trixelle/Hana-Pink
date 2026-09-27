@@ -1,12 +1,9 @@
-<!-- Hana Pink site — part 11 of 14: language switch, about plate, teleport list
-     Carrd: Embed element, Type: Code, Style: Hidden (Body End)
-     Keep the parts in this order. -->
 <script>
 (function () {
 var PM = window.PM;
 if (!PM || !PM.root) return;
 var root = PM.root, $ = PM.$, el = PM.el, t = PM.t, L = PM.L, lb = PM.lb, layers = PM.layers;
-var CONFIG = PM.CONFIG, BIO = PM.BIO, LIKES = PM.LIKES, LINKS = PM.LINKS;
+var CONFIG = PM.CONFIG, LINKS = PM.LINKS;
 var NAV_REGIONS = PM.NAV_REGIONS, PLACES = PM.PLACES, FEATURED = PM.FEATURED, SPARK = PM.SPARK;
 var loadPlace = PM.loadPlace, photosLabel = PM.photosLabel, RM = PM.RM;
 PM.applyLang = function () {
@@ -30,11 +27,24 @@ PM.setLang = function (l) { PM.lang = l === 'zh' ? 'zh' : 'en'; try { localStora
 $('.pm-lang').addEventListener('click', function () { PM.setLang(PM.lang === 'en' ? 'zh' : 'en'); });
 
 PM.renderPlate = function () {
+  var P = PM.PROFILE, row = function (dl, k, v) { var d = el('div'); d.appendChild(el('dt', '', L(k))); d.appendChild(el('dd', '', L(v))); dl.appendChild(d); };
+  $('.pm-ptitle').textContent = L(P.title);
+  $('.pm-pname').textContent = P.name;
+  $('.pm-look').textContent = L(P.look);
+  var cap = $('.pm-portrait figcaption'); cap.textContent = '';
+  cap.appendChild(el('span', '', P.name)); cap.appendChild(el('span', '', L(P.race)));
+  var st = $('.pm-stats'); st.textContent = '';
+  P.stats.forEach(function (x) { row(st, x.k, x.v); });
+  var tr = $('.pm-likes'); tr.textContent = '';
+  P.traits.forEach(function (x) { tr.appendChild(el('li', '', L(x))); });
   var bio = $('.pm-bio'); bio.textContent = '';
-  BIO[PM.lang].forEach(function (s) { bio.appendChild(el('p', '', s)); });
-  var ul = $('.pm-likes'); ul.textContent = '';
-  LIKES.forEach(function (l) { ul.appendChild(el('li', '', PM.lang === 'zh' ? l[1] : l[0])); });
+  (P.story[PM.lang] || P.story.en).forEach(function (t) { bio.appendChild(el('p', '', t)); });
+  var nt = $('.pm-notes'); nt.textContent = '';
+  P.notes.forEach(function (x) { row(nt, x.k, x.v); });
+  $('.pm-secret .sv').textContent = L(P.secret);
 }
+$('.pm-secret').addEventListener('click', function () { this.classList.toggle('open'); });
+
 var EXT = '<svg viewBox="0 0 14 14" aria-hidden="true"><path d="M5 2h7v7M12 2L3 11" fill="none" stroke="currentColor"/></svg>';
 PM.renderLinks = function () {
   var box = $('.pm-ls'); box.textContent = '';
@@ -142,7 +152,7 @@ function heroSet(i) {
   $('.pm-frame-n').textContent = pad3(heroIdx + 1);
 }
 function heroLoad() {
-  var src = FEATURED || PLACES[0];
+  var src = FEATURED || (CONFIG.heroTag ? { tag: CONFIG.heroTag, en: 'Featured', zh: '精选作品' } : null) || PLACES[0];
   if (!src) return;
   loadPlace(src).then(function (items) {
     if (!items.length) return;
@@ -164,8 +174,9 @@ $('.pm-shutter').addEventListener('click', function () {
 
 function updateFacts() {
   var total = 0, seen = 0;
-  PLACES.forEach(function (p) { if (PM.counts[p.tag] != null) { total += PM.counts[p.tag]; seen++; } });
-  $('.pm-fact-frames').textContent = seen ? (seen < PLACES.length ? total + '+' : String(total)) : '—';
+  var real = PLACES.filter(function (p) { return !p.all; });
+  real.forEach(function (p) { if (PM.counts[p.tag] != null) { total += PM.counts[p.tag]; seen++; } });
+  $('.pm-fact-frames').textContent = seen ? (seen < real.length ? total + '+' : String(total)) : '—';
 }
 
 var countsLoaded = false;

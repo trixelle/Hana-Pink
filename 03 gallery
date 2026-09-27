@@ -1,8 +1,5 @@
-<!-- Hana Pink site — part 3 of 14: CSS 3 of 5 (sections, teleport list, photo grid)
-     Carrd: Embed element, Type: Code, Style: Hidden (Head)
-     Keep the parts in this order. -->
 <style>
-/* ---------- Sections ---------- */
+/* Sections */
 .pm-sec{border-top:1px solid var(--line);padding:clamp(60px,9vh,116px) clamp(20px,4vw,58px)}
 .pm-in{max-width:1180px;margin:0 auto}
 .pm-head{display:flex;align-items:flex-end;gap:16px}
@@ -17,8 +14,8 @@
 .pm-sp{width:14px;height:14px;flex:none;overflow:visible}
 .pm-sp path{fill:currentColor}
 
-/* ---------- Featured banner ---------- */
-.pm-feat{position:relative;display:grid;align-items:end;width:100%;min-height:clamp(190px,26vh,280px);margin-bottom:26px;overflow:hidden;border:1px solid var(--line);background:var(--mist)}
+/* Featured banner */
+.pm-feat{position:relative;display:grid;align-items:end;width:100%;min-height:clamp(190px,26vh,280px);margin-bottom:26px;overflow:hidden;border:1px solid var(--frame);background:var(--mist)}
 .pm-feat img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s,transform 1.2s var(--ease)}
 .pm-feat img.on{opacity:1}
 .pm-feat:hover img.on{transform:scale(1.03)}
@@ -29,8 +26,8 @@
 .pm-feat-c span{display:inline-flex;align-items:center;gap:8px;margin-top:8px;font-size:12px;color:var(--ash)}
 .pm-feat .pm-vf{--vf-inset:12px;--vf:18px;z-index:1}
 
-/* ---------- Teleport list ---------- */
-.pm-tp{display:grid;grid-template-columns:220px minmax(0,1fr) minmax(280px,34%);border:1px solid var(--line);background:var(--fill);min-height:540px}
+/* Teleport list */
+.pm-tp{display:grid;grid-template-columns:220px minmax(0,1fr) minmax(280px,34%);border:1px solid var(--frame);background:var(--paper);min-height:540px}
 .pm-regions{border-right:1px solid var(--line);padding:12px 0;display:flex;flex-direction:column}
 .pm-region{display:flex;justify-content:space-between;align-items:baseline;gap:10px;padding:13px 20px;color:var(--ash);border-left:1px solid transparent;transition:color .2s,background .25s,border-color .2s}
 .pm-region .l{display:block}
@@ -70,7 +67,7 @@
   .pm-preview{display:none}
 }
 
-/* ---------- Zone (category) view ---------- */
+/* Zone (category) view */
 .pm-zv{min-height:100vh;padding:0 clamp(12px,3vw,40px) 90px}
 .pm-zv-top{position:sticky;top:var(--barh);z-index:6;display:flex;align-items:center;gap:14px;padding:12px 0;background:var(--scrim);
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:opacity .4s}

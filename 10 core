@@ -1,6 +1,3 @@
-<!-- Hana Pink site — part 10 of 14: core: helpers, Cloudinary, clock
-     Carrd: Embed element, Type: Code, Style: Hidden (Body End)
-     Keep the parts in this order. -->
 <script>
 (function () {
 var PM = window.PM;
@@ -33,6 +30,15 @@ var FEATURED = null, NAV_REGIONS = [], PLACES = [];
 REGIONS.forEach(function (r) {
   r.places.forEach(function (p) { p.region = r; PLACES.push(p); });
   if (r.featured && !FEATURED) FEATURED = r.places[0]; else NAV_REGIONS.push(r);
+});
+// every group with more than one set gets an "All" destination that merges them,
+// so a visitor can see the whole group in one click
+NAV_REGIONS.forEach(function (r) {
+  if (r.places.length < 2) return;
+  var all = { tag: 'all-' + r.id, all: true, region: r, members: r.places.slice(),
+              en: 'All ' + r.en, zh: '全部' + r.zh };
+  r.places.unshift(all);
+  PLACES.push(all);
 });
 function findPlace(q) {
   q = String(q || '').trim().toLowerCase(); if (!q) return null;
@@ -113,7 +119,19 @@ var cache = {};
 function loadPlace(place) {
   if (cache[place.tag]) return cache[place.tag];
   var p;
-  if (DEMO) p = wait(250 + Math.random() * 350).then(function () { return demoList(place); });
+  if (place.all) {
+    p = Promise.all(place.members.map(function (m) { return loadPlace(m); })).then(function (lists) {
+      var out = [], seen = {};
+      lists.forEach(function (l) {
+        l.forEach(function (it) {
+          var k = it.thumb(CONFIG.thumbWidths[0]);
+          if (!seen[k]) { seen[k] = 1; out.push(it); }   // a photo in two sets appears once
+        });
+      });
+      return out.sort(function (a, b) { return (b.created || 0) - (a.created || 0); });
+    });
+  }
+  else if (DEMO) p = wait(250 + Math.random() * 350).then(function () { return demoList(place); });
   else p = fetch('https://res.cloudinary.com/' + CONFIG.cloudName + '/image/list/' + encodeURIComponent(place.tag) + '.json')
       .then(function (res) {
         if (res.status === 404) return { resources: [] };   // tag has no photos yet
@@ -145,7 +163,7 @@ document.addEventListener('visibilitychange', function () {
 $('.pm-hero-pic').src = CONFIG.heroImage || demoSrc(hash('hero'), 1600, 900, '');
 $('.pm-plate-pic').src = CONFIG.profileImage || demoSrc(hash('plate-portrait'), 600, 800, '');
 if (DEMO) $('.pm-demo').hidden = false;
-$('.pm-fact-dest').textContent = PLACES.length;
+$('.pm-fact-dest').textContent = PLACES.filter(function (p) { return !p.all; }).length;
 
 
 function bi(en, zh) { return PM.lang === 'zh' ? zh : en; }
