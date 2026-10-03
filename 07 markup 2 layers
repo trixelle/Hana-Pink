@@ -1,7 +1,3 @@
-<!-- Hana Pink site — part 7 of 14: overlay markup (viewer, teleport bar, chat log, toast)
-     Carrd: Embed element, Type: Code, Style: Inline (directly after the previous part)
-     Keep the parts in this order. -->
-<!-- Layers: moved to <body> on load so Carrd's containers can't clip them -->
 <div class="pm-layer pm-lb" hidden role="dialog" aria-modal="true" aria-label="Photo viewer">
   <div class="pm-lb-stage">
     <div class="pm-lb-frame"><img alt=""><div class="pm-vf" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>

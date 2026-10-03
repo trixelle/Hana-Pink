@@ -2,8 +2,8 @@
 window.PM = window.PM || {};
 
 PM.CONFIG = {
-  cloudName: 'pa5desou',         // Cloudinary cloud name. Empty = demo placeholders.
-  thumbWidths: [480, 960, 1600], // grid sizes; the browser picks one per screen
+  cloudName: 'pa5desou',         // Cloudinary cloud name
+  thumbWidths: [480, 960, 1600], // grid sizes
   fullWidths: [960, 1600, 2400], // viewer sizes
   batchSize: 18,                 // photos added per scroll step
   defaultLang: 'en',             // 'en' or 'zh'
@@ -12,39 +12,47 @@ PM.CONFIG = {
   profileImage: '',              // full image URL for the Adventurer plate
   cursor: { normal: '', normalX: 12, normalY: 12, pointer: '', pointerX: 12, pointerY: 2 },
   cursorTrail: true,
-  musicUrl: '',                  // direct link to an audio FILE (.mp3/.m4a). A YouTube page will not play.
+  musicUrl: '',                  // direct link to an audio FILE (.mp3/.m4a)
   castTime: 900,                 // teleport cast bar length (ms)
   showIntro: true                // title card, once per visit
 };
 
 PM.REGIONS = [
-  { id: 'portraits', en: 'Portraits', zh: '人像写真', places: [
-    { tag: 'close-up',        en: 'Close-up',        zh: '面部特写' },
-    { tag: 'emotional',       en: 'Emotional',       zh: '情绪人像' }
+  { id: 'featured', en: 'Featured', zh: '精选作品', featured: true,
+    desc: { en: 'A handful of favourites, whatever category they come from.', zh: '几张最喜欢的作品，不分类别。' },
+    places: [
+      { tag: 'featured',      en: 'Featured',        zh: '精选作品' }
   ]},
-  { id: 'atmosphere', en: 'Atmosphere', zh: '氛围场景', places: [
-    { tag: 'soft-dreamy',     en: 'Soft & Dreamy',   zh: '梦幻糖水风' },
-    { tag: 'epic-combat',     en: 'Epic Combat',     zh: '华丽战斗风' },
-    { tag: 'cinematic-mood',  en: 'Cinematic Mood',  zh: '氛围电影感' },
-    { tag: 'nature-scenery',  en: 'Nature & Scenery',zh: '自然风景类' }
+  { id: 'portraits', en: 'Portraits', zh: '人像写真',
+    desc: { en: 'The person first: expression, posture, presence.', zh: '以人物表现为核心：表情、姿态与气质。' },
+    places: [
+      { tag: 'portraits',     en: 'Portraits',       zh: '人像写真' }
   ]},
-  { id: 'glamour', en: 'Glamour', zh: '幻化穿搭', places: [
-    { tag: 'light-palette',   en: 'Light Palette',   zh: '浅色系' },
-    { tag: 'dark-palette',    en: 'Dark Palette',    zh: '深色系' }
+  { id: 'atmosphere', en: 'Atmosphere', zh: '氛围场景',
+    desc: { en: 'Mood first. She is still the subject, but the light, colour and setting carry the frame.', zh: '重点在感觉：人物依然是主角，而光影、色彩与环境共同烘托画面。' },
+    places: [
+      { tag: 'soft-dreamy',   en: 'Soft & Dreamy',   zh: '梦幻糖水' },
+      { tag: 'dynamic-mood',  en: 'Dynamic Mood',    zh: '动态氛围' }
   ]},
-  { id: 'together', en: 'Together', zh: '双人及多人', places: [
-    { tag: 'couples',         en: 'Couples',         zh: '情侣' },
-    { tag: 'groups',          en: 'Groups',          zh: '团体' }
+  { id: 'glamour', en: 'Glamour', zh: '幻化穿搭',
+    desc: { en: 'Outfits: colour, silhouette and the details that make a glamour.', zh: '以造型为主：服装、配色与饰品的搭配。' },
+    places: [
+      { tag: 'light-palette', en: 'Light Palette',   zh: '浅色系' },
+      { tag: 'dark-palette',  en: 'Dark Palette',    zh: '深色系' }
+  ]},
+  { id: 'together', en: 'Together', zh: '双人及多人',
+    desc: { en: 'Two or more, and whatever is happening between them.', zh: '以角色之间的互动、关系与故事感为核心。' },
+    places: [
+      { tag: 'couples',       en: 'Couples',         zh: '双人' },
+      { tag: 'groups',        en: 'Groups',          zh: '多人' }
   ]}
 ];
 
 PM.LINKS = [
-  { name: 'Lodestone', sub: 'Hana Pink', url: 'https://eu.finalfantasyxiv.com/lodestone/character/49930933/' },
   { name: 'X', sub: '@PinkeaiX', url: 'https://x.com/PinkeaiX' },
   { name: 'Bluesky', sub: 'pinkbsky.bsky.social', url: 'https://bsky.app/profile/pinkbsky.bsky.social' },
   { name: 'Discord', sub: 'pinkeai', url: 'https://discord.com/users/168225345827241985' },
-  { name: 'YouTube', sub: '@Giantpinktv', url: 'https://www.youtube.com/@Giantpinktv' },
-  { name: 'Eorzea Collection', sub: { en: 'Glamours', zh: '幻化作品' }, url: 'https://ffxiv.eorzeacollection.com/creator/110838' }
+  { name: 'YouTube', sub: '@Giantpinktv', url: 'https://www.youtube.com/@Giantpinktv' }
 ];
 
 PM.PROFILE = {
@@ -78,6 +86,6 @@ PM.PROFILE = {
     { k: { en: 'Wish', zh: '愿望' },           v: { en: 'That her cafe becomes a safe haven for every adventurer, and that she gets to travel every field of flowers in Eorzea', zh: '希望咖啡馆能成为所有冒险者的避风港，也希望能带着伙伴们走遍艾欧泽亚的每一片花海，看遍所有春日的樱花' } }
   ],
   secret: { en: 'When she meets someone she likes, her horns grows warm and turn red without her even noticing...',
-            zh: '遇见喜欢的人时，她的龙角会悄悄发烫泛红 —— 连她自己都没发现。' }
+            zh: '遇见喜欢的人时，她的龙角会悄悄发烫泛红，连她自己都没发现。' }
 };
 </script>

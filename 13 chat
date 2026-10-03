@@ -1,6 +1,3 @@
-<!-- Hana Pink site — part 13 of 14: chat log, GPose mode, keyboard, navigation
-     Carrd: Embed element, Type: Code, Style: Hidden (Body End)
-     Keep the parts in this order. -->
 <script>
 (function () {
 var PM = window.PM;
