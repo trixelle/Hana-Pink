@@ -4,8 +4,6 @@ This is the site I built for Pink (Hana Pink, Gilgamesh / Aether) to show off he
 photography. It runs on Carrd, the photos live in Cloudinary, and the whole thing is
 bilingual (English / 简体中文).
 
-![The landing screen](preview.png)
-
 Keeping my notes here so future me remembers how any of this works.
 
 ---
